@@ -334,6 +334,8 @@ def run_loop(
     if evaluate_bleu:
         # Create summary writer to log bleu score (values can be displayed in
         # Tensorboard).
+        if not os.path.exists(estimator.model_dir):
+            os.makedirs(estimator.model_dir)
         bleu_writer = tf.summary.FileWriter(
             os.path.join(estimator.model_dir, BLEU_DIR))
         if bleu_threshold is not None:
